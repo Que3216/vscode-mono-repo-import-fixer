@@ -2,7 +2,7 @@
 
 If you have a Lerna mono-repo, then vs-code may auto-generate imports for you that look like this:
 
-my-app/packages/package1/src/doSomethingAmazing.ts:
+Contents of my-app/packages/package1/src/doSomethingAmazing.ts:
 ```
 import { doSomething } from "../../package2/src/doSomething.ts";
 
@@ -11,7 +11,7 @@ doSomething();
 
 When you really want the import to look like this:
 
-my-app/packages/package1/src/doSomethingAmazing.ts:
+Contents of my-app/packages/package1/src/doSomethingAmazing.ts:
 ```
 import { doSomething } from "@my-app/package2";
 
