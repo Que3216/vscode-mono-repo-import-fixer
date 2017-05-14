@@ -1,6 +1,6 @@
 import { window, workspace, commands, Disposable, ExtensionContext, TextDocument, Position, Range, TextDocumentWillSaveEvent } from 'vscode';
 import { dirname, join, resolve, relative } from "path";
-import { existsSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 
 // this method is called when your extension is activated. activation is
 // controlled by the activation events defined in package.json
@@ -69,10 +69,9 @@ export class ImportFixer {
         if (packageJsonPath === undefined) {
             return undefined;
         }
-        // This will cache the package.json
-        // until you restart vs-code
-        // Assumption: you won't be changing your package name much
-        return require(packageJsonPath).name;
+
+        const packageDefinition = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+        return packageDefinition.name;
     }
 
     private findPackageJsonPathForFile(filePath: string): string | undefined {
