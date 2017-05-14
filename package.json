@@ -10,6 +10,14 @@
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "lerna",
+        "yerna",
+        "monorepo",
+        "mono",
+        "typescript",
+        "import"
+    ],
 	"activationEvents": [
 		"onLanguage:typescript",
         "onLanguage:typescriptreact"
