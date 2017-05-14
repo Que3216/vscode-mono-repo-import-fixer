@@ -1,4 +1,4 @@
-import { window, workspace, commands, Disposable, ExtensionContext, TextDocument, Position, Range } from 'vscode';
+import { window, workspace, commands, Disposable, ExtensionContext, TextDocument, Position, Range, TextDocumentWillSaveEvent } from 'vscode';
 import { dirname, join, resolve, relative } from "path";
 import { existsSync } from "fs";
 
@@ -18,14 +18,15 @@ export function activate(ctx: ExtensionContext) {
 }
 
 export class ImportFixer {
-    public checkForBrokenImports() {
-        // Get the current text editor
+    public checkForBrokenImports(doc: TextDocument) {
         const editor = window.activeTextEditor;
         if (!editor) {
             return;
         }
 
-        const doc = editor.document;
+        if (doc !== editor.document) {
+            return;
+        }
 
         const isTypescript = doc.languageId === "typescript" || doc.languageId === "typescriptreact";
 
@@ -33,7 +34,7 @@ export class ImportFixer {
             return;
         }
 
-        const packagesDirectoryMatch = doc.fileName.match(/(.*\/packages)\/[^\/]*\/src/);
+        const packagesDirectoryMatch = doc.fileName.match(/(.*\/packages)\/[^\/]*\//);
 
         if (packagesDirectoryMatch == null) {
             return;
@@ -103,19 +104,17 @@ class ImportFixerController {
 
     constructor(ImportFixer: ImportFixer) {
         this._importFixer = ImportFixer;
-        this._importFixer.checkForBrokenImports();
 
         // subscribe to selection change and editor activation events
         let subscriptions: Disposable[] = [];
-        window.onDidChangeTextEditorSelection(this._onEvent, this, subscriptions);
-        window.onDidChangeActiveTextEditor(this._onEvent, this, subscriptions);
+        workspace.onWillSaveTextDocument(this._onEvent, this, subscriptions);
 
         // create a combined disposable from both event subscriptions
         this._disposable = Disposable.from(...subscriptions);
     }
 
-    private _onEvent() {
-        this._importFixer.checkForBrokenImports();
+    private _onEvent(event: TextDocumentWillSaveEvent) {
+        this._importFixer.checkForBrokenImports(event.document);
     }
 
     public dispose() {

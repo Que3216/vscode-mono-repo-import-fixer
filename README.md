@@ -18,9 +18,11 @@ import { doSomething } from "@my-app/package2";
 doSomething();
 ```
 
-This extension automatically converts any imports of the first format to the second format,
-if it detects it's running in a Lerna monorepo.
+This extension automatically converts any imports of the first format to the second format when
+you save the file.
+
+It runs on any .ts or .tsx files that are nested inside a 'packages' directory.
 
 ## Usage
 
-Just install the extension, and it'll work automatically.
+Just install the extension, and it'll fix the imports whenever you hit save.

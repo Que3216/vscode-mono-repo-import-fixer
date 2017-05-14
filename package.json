@@ -1,8 +1,8 @@
 {
     "name": "typescript-mono-repo-import-helper",
     "displayName": "Typescript MonoRepo Import Fixer",
-    "description": "Automatically fixes typescript imports from sibling packages in a mono repo (e.g. Lerna)",
-    "version": "0.0.2",
+    "description": "Automatically fixes imports of TypeScript files from sibling packages in a mono repo (e.g. Lerna)",
+    "version": "0.0.3",
     "publisher": "q",
     "engines": {
         "vscode": "^1.12.0"
