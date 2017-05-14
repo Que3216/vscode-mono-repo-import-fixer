@@ -81,6 +81,10 @@ export class ImportFixer {
             previousDirectory = directory;
             const packageJsonPath = join(directory, "package.json");
             if (existsSync(packageJsonPath)) {
+                if (previousDirectory.endsWith("/packages")) {
+                    // We've gone too far
+                    return undefined;
+                }
                 return packageJsonPath;
             }
             directory = dirname(directory);
