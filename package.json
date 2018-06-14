@@ -2,7 +2,7 @@
     "name": "typescript-mono-repo-import-helper",
     "displayName": "Typescript MonoRepo Import Fixer",
     "description": "Automatically fixes imports of TypeScript files from sibling packages in a mono repo (e.g. Lerna)",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "publisher": "q",
     "repository": {
         "type": "git",
@@ -22,10 +22,10 @@
         "typescript",
         "import"
     ],
-	"activationEvents": [
-		"onLanguage:typescript",
+    "activationEvents": [
+        "onLanguage:typescript",
         "onLanguage:typescriptreact"
-	],
+    ],
     "main": "./out/src/extension",
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
