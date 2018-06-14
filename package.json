@@ -4,6 +4,10 @@
     "description": "Automatically fixes imports of TypeScript files from sibling packages in a mono repo (e.g. Lerna)",
     "version": "0.0.5",
     "publisher": "q",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Que3216/vscode-mono-repo-import-fixer.git"
+    },
     "engines": {
         "vscode": "^1.12.0"
     },
