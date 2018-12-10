@@ -2,6 +2,12 @@ import { window, workspace, commands, Disposable, ExtensionContext, TextDocument
 import { dirname, join, resolve, relative } from "path";
 import { existsSync, readFileSync } from "fs";
 
+const isTypescript = languageId => languageId === "typescript" || languageId === "typescriptreact";
+
+const isJavascript = languageId => languageId === "javascript" || languageId === "javascriptreact";
+
+const isSupportedLanguage = ({languageId}) => isTypescript(languageId) || isJavascript(languageId)
+
 // this method is called when your extension is activated. activation is
 // controlled by the activation events defined in package.json
 export function activate(ctx: ExtensionContext) {
@@ -28,9 +34,7 @@ export class ImportFixer {
             return;
         }
 
-        const isTypescript = doc.languageId === "typescript" || doc.languageId === "typescriptreact";
-
-        if (!isTypescript) {
+        if (!isSupportedLanguage(doc)) {
             return;
         }
 
