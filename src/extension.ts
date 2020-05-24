@@ -42,9 +42,9 @@ export class ImportFixer {
 
         const packagesDirectory = packagesDirectoryMatch[1];
         const pathToPackagesDirectory = relative(dirname(doc.fileName), packagesDirectory);
-        const packageNameRegex = "[^\"\/\.]*";
-        const importPathRegex = escapeRegExp(pathToPackagesDirectory) + "\/" + packageNameRegex + "\/" + "[^\"]*";
-        const importRegex = new RegExp("from \"(" + importPathRegex + ")\";\n", "g");
+        const packageNameRegex = "[^\"\'\/\.]*";
+        const importPathRegex = escapeRegExp(pathToPackagesDirectory) + "\/" + packageNameRegex + "\/" + "[^\"\']*";
+        const importRegex = new RegExp("from [\"\'](" + importPathRegex + ")[\"\'];\n", "g");
         let match = importRegex.exec(doc.getText());
         editor.edit(builder => {
             while (match != null) {
