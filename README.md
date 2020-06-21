@@ -19,7 +19,7 @@ doSomething();
 This extension automatically converts any imports of the first format to the second format when
 you save the file.
 
-It runs on any .ts or .tsx files that are nested inside a 'packages' directory.
+It runs on any .ts .tsx or .js files that are nested inside a 'packages' directory.
 
 ## Usage
 
