@@ -24,8 +24,15 @@
     ],
     "activationEvents": [
         "onLanguage:typescript",
-        "onLanguage:typescriptreact"
+        "onLanguage:typescriptreact",
+        "onCommand:typescript-mono-repo-import-helper.fix"
     ],
+    "contributes": {
+        "commands": [{
+            "command": "typescript-mono-repo-import-helper.fix",
+            "title": "Fix typescript imports"
+        }]
+    },
     "main": "./out/src/extension",
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
@@ -34,10 +41,10 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.0.3",
+        "typescript": "^4.3.5",
         "vscode": "^1.0.0",
         "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
+        "@types/node": "^12.20.19",
         "@types/mocha": "^2.2.32"
     }
 }

@@ -111,6 +111,9 @@ class ImportFixerController {
         // subscribe to selection change and editor activation events
         let subscriptions: Disposable[] = [];
         workspace.onWillSaveTextDocument(this._onEvent, this, subscriptions);
+        subscriptions.push(
+            commands.registerCommand('typescript-mono-repo-import-helper.fix', this._onCommand, this)
+        );
 
         // create a combined disposable from both event subscriptions
         this._disposable = Disposable.from(...subscriptions);
@@ -118,6 +121,12 @@ class ImportFixerController {
 
     private _onEvent(event: TextDocumentWillSaveEvent) {
         this._importFixer.checkForBrokenImports(event.document);
+    }
+    private _onCommand() {
+        const editor = window.activeTextEditor;
+        if (editor) {
+            this._importFixer.checkForBrokenImports(editor.document);
+        }
     }
 
     public dispose() {
